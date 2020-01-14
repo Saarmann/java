@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class DemoConnectionMySql {
+public class UpdateRowID {
 
 	/**
 	 * @param args
@@ -28,10 +28,11 @@ public class DemoConnectionMySql {
             Statement cmd = conn.createStatement (); // this createStatement method should be always described 
 		 	
 	 		
-	        String query = "SELECT * FROM CD";
-	        
-	        ResultSet res = cmd.executeQuery(query); // 2) send sql string
-	        
+            String query = "UPDATE cd SET Artist='Uno Loop', Title='Tere' where ID=1";
+            cmd.executeUpdate(query);
+	             
+            query = "Select * from CD";
+            ResultSet res = cmd.executeQuery(query);
 	 		
 	        while (res.next()) { // peale query saamist käib läbi kõik read 
 	        	
@@ -40,7 +41,8 @@ public class DemoConnectionMySql {
 		        //System.out.print("\t"+res.getString(4));
 	        	
 	        	//from column name
-	        	System.out.print("\t"+res.getString("Country"));
+	        	System.out.print("\t"+res.getString("id"));
+	        	System.out.print("\t"+res.getString("Artist"));
 	        	System.out.print("\t"+res.getString("title"));
 		        System.out.println();
 	      	}
