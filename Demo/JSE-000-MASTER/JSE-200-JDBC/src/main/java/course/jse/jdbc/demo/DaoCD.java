@@ -9,7 +9,7 @@ import course.jse.jdbc.utils.DbUtils;
 import lombok.Getter;
 import lombok.Setter;
 
-public class DaoCD {
+public class Cd {
 	
 	@Getter @Setter 
 	private String artist;
@@ -27,8 +27,8 @@ public class DaoCD {
 	private int quantity;
 	@Getter @Setter 
 	private int version;
-	
-	public DaoCD(String artist, String company, double price, String title, String country, int year, int quantity,
+
+	public Cd(String artist, String company, double price, String title, String country, int year, int quantity,
 			int version) {
 				
 		this.artist = artist;
@@ -42,10 +42,11 @@ public class DaoCD {
 	}
 	
     
-	public void createCD() {
+	public void insertCD() {
 		
 		Connection conn = null;
-
+		
+			
         try
         {	
         	// 1) create connection - conn - määrame andmebaasi asukoha ja parameetrid
@@ -59,15 +60,10 @@ public class DaoCD {
             System.out.println ("Connected to Database..."); // kui jõuad siiani siis järelikult line 23 töötas
             
             Statement cd = conn.createStatement (); // this createStatement method should be always described 
-	 	
-	 		
+	 		 		
             String query = "INSERT INTO CD (Artist,Title,Company,Year,Price,Quantity,Country,Version) VALUES (?,?,?,?,?,?,?,?)";
-            
-            PreparedStatement insertCD = conn.prepareStatement("INSERT INTO CD (Artist,Title,Company,Year,Price,Quantity,Country,Version) " +
-					"VALUES (?,?,?,?,?,?,?,?)");            
-
-
-            insertCD.setString(1, "Radiohead2");
+                  
+            cd.setString(1, "Radiohead2");
             insertCD.setString(2, "The Bends");
             insertCD.setString(3, "RCA");
             insertCD.setInt(4,1998 );
@@ -75,9 +71,8 @@ public class DaoCD {
             insertCD.setInt(6, 12);
             insertCD.setString(7, "UK");
             insertCD.setInt(8, 0);
-
             
-            insertCD.executeUpdate(query);
+            cd.executeUpdate(query);
             
             
         }
