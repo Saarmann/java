@@ -10,7 +10,7 @@ public class DbUtils {
 	public static Connection createConnection() throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException{
 		
 		 String userName = "root";
-         String password = "stefan0";
+         String password = "tere";
          String url = "jdbc:mysql://localhost:3306/EShopMusic";
          Class.forName ("com.mysql.jdbc.Driver").newInstance ();
          return  DriverManager.getConnection (url, userName, password);
