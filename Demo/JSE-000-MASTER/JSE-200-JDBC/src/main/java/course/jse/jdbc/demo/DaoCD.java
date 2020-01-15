@@ -9,7 +9,7 @@ import course.jse.jdbc.utils.DbUtils;
 import lombok.Getter;
 import lombok.Setter;
 
-public class Cd {
+public class DaoCD {
 	
 	@Getter @Setter 
 	private String artist;
@@ -28,7 +28,7 @@ public class Cd {
 	@Getter @Setter 
 	private int version;
 
-	public Cd(String artist, String company, double price, String title, String country, int year, int quantity,
+	public DaoCD(String artist, String company, double price, String title, String country, int year, int quantity,
 			int version) {
 				
 		this.artist = artist;
@@ -41,7 +41,7 @@ public class Cd {
 		this.version = version;
 	}
 	
-    
+	
 	public void insertCD() {
 		
 		Connection conn = null;
@@ -49,30 +49,29 @@ public class Cd {
 			
         try
         {	
-        	// 1) create connection - conn - määrame andmebaasi asukoha ja parameetrid
+        	
             String userName = "root";
             String password = "tere";
             String url = "jdbc:mysql://localhost:3306/EShopMusic";
-            Class.forName ("com.mysql.jdbc.Driver").newInstance (); // entrypoint to database - (Driver)
+            Class.forName ("com.mysql.jdbc.Driver").newInstance (); 
             conn = DriverManager.getConnection (url, userName, password);
-            //
-            
-            System.out.println ("Connected to Database..."); // kui jõuad siiani siis järelikult line 23 töötas
-            
-            Statement cd = conn.createStatement (); // this createStatement method should be always described 
+                      
+            System.out.println ("Connected to Database..."); 
 	 		 		
-            String query = "INSERT INTO CD (Artist,Title,Company,Year,Price,Quantity,Country,Version) VALUES (?,?,?,?,?,?,?,?)";
-                  
-            cd.setString(1, "Radiohead2");
-            insertCD.setString(2, "The Bends");
-            insertCD.setString(3, "RCA");
-            insertCD.setInt(4,1998 );
-            insertCD.setDouble(5, 21.2);
-            insertCD.setInt(6, 12);
-            insertCD.setString(7, "UK");
-            insertCD.setInt(8, 0);
+            PreparedStatement insertCD = conn.prepareStatement("INSERT INTO CD (Artist,Title,Company,Year,Price,Quantity,Country,Version) " +
+					"VALUES (?,?,?,?,?,?,?,?)");            
             
-            cd.executeUpdate(query);
+                         
+            insertCD.setString(1, artist);
+            insertCD.setString(2, title);
+            insertCD.setString(3, company);
+            insertCD.setInt(4, year );
+            insertCD.setDouble(5, price);
+            insertCD.setInt(6, quantity);
+            insertCD.setString(7, country);
+            insertCD.setInt(8, version);
+            
+            insertCD.executeUpdate();
             
             
         }
