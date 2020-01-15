@@ -28,10 +28,12 @@ public class CdDaoDemo {
 		
 //		cdDao.deleteById(66L);
 		
-		List<Cd> foundCd =cdDao.findByPrice(10.20);
-		for (Cd element : foundCd) {
-			System.out.println(element);
-		};
+		cdDao.updatateById(1500, 69L);
+		
+//		List<Cd> foundCd =cdDao.findByPrice(10.20);
+//		for (Cd element : foundCd) {
+//			System.out.println(element);
+//		};
 		
 	}
 

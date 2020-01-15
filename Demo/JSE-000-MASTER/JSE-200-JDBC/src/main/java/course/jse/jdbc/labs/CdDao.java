@@ -112,18 +112,6 @@ public class CdDao {
 
 			cmd.executeUpdate(sql);
 
-//			if (res.next()) {
-//				
-//				found = new Cd();
-//				found.setArtist(res.getString("Artist"));
-//				found.setCompany(res.getString("company"));
-//				found.setCountry(res.getString("country"));
-//				found.setPrice(res.getDouble("price"));
-//				found.setQuantity(res.getInt("quantity"));
-//				found.setTitle(res.getString("title"));
-//				found.setVersion(res.getLong("version"));
-//				found.setYear(res.getInt("year"));
-//			}
 
 		}
 
@@ -138,6 +126,33 @@ public class CdDao {
 		return found;
 	}
 	
+	
+	public Cd updatateById (double price, Long id) {
+		Connection conn = null;
+			
+		try{
+				
+			conn =DbUtils.createConnection();
+			
+			Statement cmd = conn.createStatement();
+			String sql = "UPDATE cd SET price= "+price+" where id= " + id;
+
+			cmd.executeUpdate(sql);
+
+		}
+
+		catch (Exception e) {
+
+			System.err.println("Impossible to connect to Database");
+			e.printStackTrace();
+
+		} finally {
+			 DbUtils.closeConnection(conn);    
+		}
+		return null;
+	}
+	
+		
 	public List <Cd> findByPrice (double price) {
 		Connection conn = null;
 		Cd found = null;
