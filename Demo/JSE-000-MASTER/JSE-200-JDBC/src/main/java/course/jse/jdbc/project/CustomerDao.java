@@ -1,7 +1,13 @@
 package course.jse.jdbc.project;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import course.jse.jdbc.labs.Cd;
+import course.jse.jdbc.utils.DbUtils;
 import course.jse.jdbc.utils.ProjectUtils;
 
 public class CustomerDao {
@@ -54,7 +60,54 @@ public class CustomerDao {
 		
 	}
 	
-	public void editCustomer (Customer customer, int id) {
+	public List <Customer> showCustomers () {
+		Connection conn = null;
+		Customer found = null;
+		List <Customer> customerList = new ArrayList<>();
+					
+		try{
+				
+			conn =ProjectUtils.createConnection();
+			
+			Statement cmd = conn.createStatement();
+			String sql = "SELECT * FROM customer";
+					
+			ResultSet res = cmd.executeQuery(sql);
+				
+			while (res.next()) {
+			
+			found = new Customer(sql, sql, sql, sql, sql, sql, sql, sql, sql, sql, 0);
+			found.setId(res.getInt("id"));
+			found.setCustomerName(res.getString("customer_name"));
+			found.setRegistrationCode(res.getString("registration_code"));
+			found.setVatNo(res.getString("vat_no"));
+			found.setCountry(res.getString("country"));
+			found.setAddress(res.getString("address"));
+			found.setCity(res.getString("city"));
+			found.setState(res.getString("state"));
+			found.setZip(res.getString("zip"));
+			found.setCustomerEmail(res.getString("customer_email"));
+			found.setContact(res.getString("contact"));
+			found.setPaymentTerm(res.getInt("payment_term"));
+						
+			customerList.add(found);
+		}
+
+		}
+
+		catch (Exception e) {
+
+			System.err.println("Impossible to connect to Database");
+			e.printStackTrace();
+
+		} finally {
+			ProjectUtils.closeConnection(conn);    
+		}
+		return customerList;
+	}
+	
+		
+	public Customer editCustomer (Customer customer, int id) {
 		
 		 Connection conn =null;
 			
@@ -87,7 +140,8 @@ public class CustomerDao {
 	        finally {
 	           ProjectUtils.closeConnection(conn);         
 	        }
-		
+			return null;
+					
 	}
 	
 }
