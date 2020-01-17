@@ -23,7 +23,7 @@ public class DemoTransactionJdbc {
         	conn = DbUtils.createConnection();            
             System.out.println ("Connected to Database...");
             
-            conn.setAutoCommit(false);
+            conn.setAutoCommit(false); 
             
             PreparedStatement insertCD = conn.prepareStatement("INSERT INTO CD (Artist,Title,Company,Year,Price,Quantity,Country,Version) " +
             																	"VALUES (?,?,?,?,?,?,?,?)");            
@@ -51,9 +51,9 @@ public class DemoTransactionJdbc {
             
 	        insertCD.executeUpdate();
             
-	        conn.rollback();
+	        conn.rollback(); // with this one the second execute doesn't happen
 	        
-	        //conn.commit();
+	        //conn.commit(); // with this one the second happens together with row row 26 setAutoCommit
         }
         catch (Exception e) {
         	 e.printStackTrace();            
