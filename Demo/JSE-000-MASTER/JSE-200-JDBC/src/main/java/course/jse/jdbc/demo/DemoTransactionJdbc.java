@@ -40,6 +40,8 @@ public class DemoTransactionJdbc {
             
 	        insertCD.executeUpdate();
 	 	    
+//	        conn.commit();
+	        
 	        insertCD.setString(1, "Ludovico Einaudi");
             insertCD.setString(2, "Una Mattina");
             insertCD.setString(3, "RCA");
@@ -53,7 +55,7 @@ public class DemoTransactionJdbc {
             
 	        conn.rollback(); // with this one the second execute doesn't happen
 	        
-	        //conn.commit(); // with this one the second happens together with row row 26 setAutoCommit
+//	        conn.commit(); // with this one the second happens together with row row 26 setAutoCommit
         }
         catch (Exception e) {
         	 e.printStackTrace();            

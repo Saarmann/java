@@ -178,9 +178,7 @@ public class CustomerDao {
         finally {
         	ProjectUtils.closeConnection(conn);       
         }
-        
-        
-        
+                       
 
 	}
 		
@@ -196,7 +194,6 @@ public class CustomerDao {
             
             PreparedStatement sql = conn.prepareStatement("UPDATE customer SET customer_name = ?,vat_no = ?,address = ?,city = ?,state = ?,country = ?,zip = ?,customer_email = ?,contact = ?,payment_term = ? where id = ?");
             		            																	 
-            
             sql.setString(1, customer.getCustomerName());
             sql.setString(2, customer.getVatNo());
             sql.setString(3, customer.getAddress());
@@ -218,9 +215,7 @@ public class CustomerDao {
         finally {
         	ProjectUtils.closeConnection(conn);       
         }
-        
-        
-        
+                        
 
 	}
 		
